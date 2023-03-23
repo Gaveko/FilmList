@@ -2,10 +2,14 @@
 
 @section('content')
 
+<a href="{{ route('film-create-form') }}">Create film</a>
+<hr />
+
 @foreach ($films as $film)
 <div>
-    <p>{{ $film->title }}</p>
+    <a href="{{ route('film-details', ['id' => $film->id]) }}"><p>{{ $film->title }}</p></a>
     <p>{{ $film->rating }}</p>
+    <hr />
 </div>
 @endforeach
 
