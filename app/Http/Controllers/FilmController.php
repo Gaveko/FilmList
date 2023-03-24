@@ -33,10 +33,8 @@ class FilmController extends Controller
         return redirect(route('film-index'));
     }
 
-    public function details(int $id)
+    public function details(Film $film)
     {
-        $film = Film::findOrFail($id);
-
         return view('films.details', ['film' => $film]);
     }
 }

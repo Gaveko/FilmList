@@ -7,7 +7,7 @@
 
 @foreach ($films as $film)
 <div>
-    <a href="{{ route('film-details', ['id' => $film->id]) }}"><p>{{ $film->title }}</p></a>
+    <a href="{{ route('film-details', ['film' => $film]) }}"><p>{{ $film->title }}</p></a>
     <p>{{ $film->rating }}</p>
     <hr />
 </div>

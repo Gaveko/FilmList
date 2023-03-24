@@ -15,7 +15,7 @@ use App\Http\Controllers\FilmController;
 */
 
 Route::get('/', [FilmController::class, 'index'])->name('film-index');
-Route::get('/{id}', [FilmController::class, 'details'])->name('film-details');
+Route::get('/{film}', [FilmController::class, 'details'])->name('film-details');
 
 
 Route::get('/film/create', [FilmController::class, 'createForm'])->name('film-create-form');
