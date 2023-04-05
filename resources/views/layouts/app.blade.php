@@ -8,6 +8,8 @@
     </head>
     <body>
         <div class="container text-center">
+            <a href="{{ route('film.index') }}">Home</a>
+            <hr />
             @yield('content')
         </div>
     

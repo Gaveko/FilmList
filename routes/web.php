@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\FilmController;
+
+use Illuminate\Support\Facades\Storage;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,9 +16,15 @@ use App\Http\Controllers\FilmController;
 |
 */
 
-Route::get('/', [FilmController::class, 'index'])->name('film-index');
-Route::get('/{film}', [FilmController::class, 'details'])->name('film-details');
+Route::get('/', [FilmController::class, 'index'])->name('film.index');
+
+Route::get('/create_file', function () {
+    Storage::disk('local')->put('myfile.txt', 'First file in filesystem');
+    return 'File created';
+});
+
+Route::get('/{film}', [FilmController::class, 'details'])->name('film.details');
 
 
-Route::get('/film/create', [FilmController::class, 'createForm'])->name('film-create-form');
-Route::post('/film/create', [FilmController::class, 'create'])->name('film-create');
+Route::get('/film/create', [FilmController::class, 'create'])->name('film.create');
+Route::post('/film/create', [FilmController::class, 'store'])->name('film.store');
