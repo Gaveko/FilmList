@@ -11,7 +11,6 @@
         <div class="col">
             <img src="/storage/{{ $film->poster_path }}" width="250" height="250"/>
             <a href="{{ route('film.details', ['film' => $film]) }}"><p>{{ $film->title }}</p></a>
-            <p>{{ $film->rating }}</p>
         </div>
     @endforeach
 </div>
