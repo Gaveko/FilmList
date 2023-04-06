@@ -2,7 +2,13 @@
 
 @section('content')
 
-<a href="{{ route('film.create') }}">Create film</a>
+@if (Auth::user())
+    <a href="{{ route('film.create') }}">Create film</a>
+@else 
+    <p>Будь ласка авторизуйтеся</p>
+    <a href="{{ route('auth.login') }}">Login</a>
+    <a href="{{ route('auth.register') }}">Register</a>
+@endif
 
 <hr />
 
