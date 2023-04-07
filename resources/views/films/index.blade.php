@@ -4,6 +4,10 @@
 
 @if (Auth::user())
     <a href="{{ route('film.create') }}">Create film</a>
+    <form method="POST" action="{{ route('logout') }}" enctype="multipart/form-data">
+        @csrf
+        <input type="submit" value="Logout" />
+    </form>
 @else 
     <p>Будь ласка авторизуйтеся</p>
     <a href="{{ route('auth.login') }}">Login</a>
