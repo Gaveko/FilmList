@@ -10,6 +10,16 @@
         <h2>{{ $film->title }}</h2>
         <p>{{ $film->description }}</p>
         <p>Рейтинг - {{ $film->rating }}</p>
+        <p>Evaluate film</p>
+        <form>
+            @csrf
+            <select>
+                @for ($i = 1; $i < 11; $i++)
+                    <option value="{{ $i }}">{{ $i }}</option>
+                @endfor
+            </select>
+            <input type="submit" value="Evaluate"/>
+        </form>
     </div>
 </div>
 
