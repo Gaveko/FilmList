@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Review;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -44,5 +45,18 @@ class FilmController extends Controller
     public function details(Film $film)
     {
         return view('films.details', ['film' => $film]);
+    }
+
+    public function sendReview(Request $request)
+    {
+        $film = Film::find($request->film_id);
+
+        $review = new Review;
+        $review->body = $request->body;
+        $review->user()->associate($request->user());
+        $review->film()->associate($film);
+        $review->save();
+
+        return back();
     }
 }
