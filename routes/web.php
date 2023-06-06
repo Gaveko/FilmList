@@ -27,6 +27,7 @@ Route::get('/create_file', function () {
 Route::get('/{film}', [FilmController::class, 'details'])->name('film.details');
 
 Route::post('/review', [FilmController::class, 'sendReview'])->name('review');
+Route::post('/evaluate', [FilmController::class, 'evaluate'])->name('evaluate');
 
 Route::get('/film/create', [FilmController::class, 'create'])->name('film.create');
 Route::post('/film/create', [FilmController::class, 'store'])->name('film.store');

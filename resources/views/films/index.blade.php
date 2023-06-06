@@ -10,8 +10,8 @@
     </form>
 @else 
     <p>Будь ласка авторизуйтеся</p>
-    <a href="{{ route('auth.login') }}">Login</a>
-    <a href="{{ route('auth.register') }}">Register</a>
+    <a href="{{ route('auth.login') }}" class="btn btn-primary">Login</a>
+    <a href="{{ route('auth.register') }}" class="btn btn-primary">Register</a>
 @endif
 
 <hr />

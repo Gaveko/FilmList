@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('description');
-            $table->float('rating', 2, 1);
+            $table->float('rating', 3, 1);
             $table->string('poster_path', 100);
             $table->timestamps();
         });

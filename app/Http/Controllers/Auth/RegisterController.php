@@ -23,6 +23,6 @@ class RegisterController extends Controller
         $new_user->password = Hash::make($request->password);
         $new_user->save();
 
-        return redirect(route('auth.authenticate'));
+        return redirect(route('auth.login'));
     }
 }

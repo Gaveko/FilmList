@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\FilmRated;
+use App\Models\Rating;
 use App\Models\Review;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -42,9 +44,20 @@ class FilmController extends Controller
         return redirect(route('film.index'));
     }
 
-    public function details(Film $film)
+    public function details(Request $request, Film $film)
     {
-        return view('films.details', ['film' => $film]);
+        $canEvaluate = true;
+        $evaluate = null;
+
+        if ($request->user()) {
+            if ($film->ratings()->where('user_id', $request->user()->id)->exists()) {
+                $canEvaluate = false;
+                $evaluate = $film->ratings()->where('user_id', $request->user()->id)->first()->rating;
+            }
+        }
+        
+
+        return view('films.details', ['film' => $film, 'canEvaluate' => $canEvaluate, 'evaluate' => $evaluate]);
     }
 
     public function sendReview(Request $request)
@@ -56,6 +69,21 @@ class FilmController extends Controller
         $review->user()->associate($request->user());
         $review->film()->associate($film);
         $review->save();
+
+        return back();
+    }
+
+    public function evaluate(Request $request)
+    {
+        $film = Film::find($request->film_id);
+
+        $rating = new Rating;
+        $rating->rating = $request->rating;
+        $rating->user()->associate($request->user());
+        $rating->film()->associate($film);
+        $rating->save();
+
+        FilmRated::dispatch($film);
 
         return back();
     }

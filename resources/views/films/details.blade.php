@@ -10,16 +10,23 @@
         <h2>{{ $film->title }}</h2>
         <p>{{ $film->description }}</p>
         <p>Рейтинг - {{ $film->rating }}</p>
-        <p>Evaluate film</p>
-        <form>
-            @csrf
-            <select>
-                @for ($i = 1; $i < 11; $i++)
-                    <option value="{{ $i }}">{{ $i }}</option>
-                @endfor
-            </select>
-            <input type="submit" value="Evaluate"/>
-        </form>
+        @if (Auth::user() && $canEvaluate)
+            <p>Evaluate film</p>
+            <form method="POST" action="{{ route('evaluate') }}" enctype="multipart/form-data">
+                @csrf
+                <select name="rating">
+                    @for ($i = 1; $i < 11; $i++)
+                        <option value="{{ $i }}">{{ $i }}</option>
+                    @endfor
+                </select>
+                <input name="film_id" type="hidden" value="{{ $film->id }}"/>
+                <input type="submit" value="Evaluate"/>
+            </form>
+        @elseif (Auth::user())
+            <p>Ви вже оцінили фільм, ваша оцінка - {{ $evaluate }}</p>
+        @else
+            <p>Авторизуйтеся будь-ласка для оцінки фільму</p>
+        @endif
     </div>
 </div>
 
