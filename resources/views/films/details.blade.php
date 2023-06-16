@@ -42,12 +42,15 @@
 @endif
 
 @foreach ($film->reviews as $review)
-    <div class="row d-flex">
-        <p>{{ $review->created_at }}</p>
-        <p>{{ $review->body }}</p>
-        <p>{{ $review->user->name }}</p>
+    <div class="card" style="width: 36rem;">
+        <div class="card-header text-start">
+            {{ $review->user->name }}
+        </div>
+        <div class="card-body">
+            <p>{{ $review->body }}</p>
+            <p>{{ $review->created_at }}</p>
+        </div>
     </div>
 @endforeach
-
 
 @endsection

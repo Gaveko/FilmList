@@ -29,8 +29,10 @@ Route::get('/{film}', [FilmController::class, 'details'])->name('film.details');
 Route::post('/review', [FilmController::class, 'sendReview'])->name('review');
 Route::post('/evaluate', [FilmController::class, 'evaluate'])->name('evaluate');
 
-Route::get('/film/create', [FilmController::class, 'create'])->name('film.create');
-Route::post('/film/create', [FilmController::class, 'store'])->name('film.store');
+Route::prefix('/film')->group(function() {
+    Route::get('/create', [FilmController::class, 'create'])->name('film.create');
+    Route::post('/create', [FilmController::class, 'store'])->name('film.store');
+});
 
 Route::prefix('/auth')->group(function () {
     Route::get('/register', function () {

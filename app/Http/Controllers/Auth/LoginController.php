@@ -21,6 +21,9 @@ class LoginController extends Controller
             return redirect(route('film.index'));
         }
 
-        return back()->withErrors($this->errors);
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+            'password' => 'The provided password is not correct.'
+        ]);
     }
 }
