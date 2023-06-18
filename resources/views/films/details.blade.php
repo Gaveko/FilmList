@@ -9,6 +9,11 @@
     <div class="col">
         <h2>{{ $film->title }}</h2>
         <p>{{ $film->description }}</p>
+        <div>
+            @foreach ($film->genres as $genre)
+                <a href="#">{{ $genre->title }}</a>
+            @endforeach
+        </div>
         <p>Рейтинг - {{ $film->rating }}</p>
         @if (Auth::user() && $canEvaluate)
             <p>Evaluate film</p>
